@@ -122,7 +122,7 @@ export const ImageGenerator: React.FC<ImageGeneratorProps> = ({ onGenerate, load
                     <button
                         type="submit"
                         disabled={loading || !prompt.trim()}
-                        className="w-full md:w-auto group relative flex items-center justify-center gap-2 bg-[#2d2d2d] dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-2xl font-bold hover:bg-black dark:hover:bg-purple-50 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed min-w-[180px]"
+                        className="w-full md:w-auto border border-slate-100 dark:border-slate-800 group relative flex items-center justify-center gap-2 bg-[#2d2d2d] dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-2xl font-bold hover:bg-black dark:hover:bg-purple-50 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed min-w-[180px]"
                     >
                         {loading ? (
                             <div className="w-5 h-5 border-2 border-white/20 dark:border-slate-900/20 border-t-white dark:border-t-slate-900 rounded-full animate-spin" />
