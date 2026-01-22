@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Clock, Trash2 } from 'lucide-react';
+import { Clock, Trash2 } from 'lucide-react';
 
 interface HistoryItem {
     id: string;
