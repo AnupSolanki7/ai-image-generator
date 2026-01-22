@@ -75,7 +75,7 @@ export const ImageGenerator: React.FC<ImageGeneratorProps> = ({ onGenerate, load
                     <label className="text-sm font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
                         Aspect Ratio
                     </label>
-                    <div className="flex gap-4">
+                    <div className="flex flex-wrap gap-4">
                         {ASPECT_RATIOS.map((ratio) => {
                             const Icon = ratio.icon;
                             return (
