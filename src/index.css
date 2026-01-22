@@ -2,26 +2,33 @@
 
 :root {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-
-  /* Light Bento Palette (Matching your image) */
   --color-bg-main: #f8fafc;
-  /* Very light gray-blue background */
   --color-card: #ffffff;
-  /* Pure white cards */
   --color-accent: #7c3aed;
-  /* Vibrant Purple (Purple-600) */
   --color-accent-soft: #ede9fe;
-  /* Light purple for pills */
   --color-text-main: #1e293b;
-  /* Slate-800 */
   --color-text-muted: #94a3b8;
-  /* Slate-400 */
   --color-border-soft: #f1f5f9;
-  /* Slate-100 */
+  --color-input-bg: #f8fafc;
+  --color-input-border: #f1f5f9;
+}
 
-  color-scheme: light;
+.dark {
+  --color-bg-main: #0f172a;
+  --color-card: #1e293b;
+  --color-accent: #8b5cf6;
+  --color-accent-soft: #2e1065;
+  --color-text-main: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-border-soft: #334155;
+  --color-input-bg: #1e293b;
+  --color-input-border: #334155;
+}
+
+body {
   color: var(--color-text-main);
   background-color: var(--color-bg-main);
+  transition: color 0.3s, background-color 0.3s;
 }
 
 body {
@@ -32,12 +39,10 @@ body {
 
 @layer components {
 
-  /* The Bento Card Style */
   .bento-card {
-    @apply bg-white border border-slate-100 rounded-[2rem] shadow-sm transition-all duration-300;
+    @apply bg-white border border-slate-100 rounded-4xl shadow-sm transition-all duration-300;
   }
 
-  /* Custom Scrollbar for the History Sidebar */
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
   }
@@ -50,7 +55,6 @@ body {
     @apply bg-slate-200 rounded-full hover:bg-slate-300;
   }
 
-  /* Shimmer Animation for Loading States */
   @keyframes shimmer {
     100% {
       transform: translateX(100%);
@@ -71,18 +75,16 @@ body {
   }
 }
 
-/* Override existing buttons to match the sleek dark generate button in image */
 .btn-generate {
   @apply bg-[#2d2d2d] hover:bg-black text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed;
 }
 
-/* Style Pills */
 .style-pill {
   @apply px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300;
 }
 
 .style-pill-active {
-  @apply bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-100;
+  @apply bg-linear-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-100;
 }
 
 .style-pill-inactive {

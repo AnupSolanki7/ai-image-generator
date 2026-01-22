@@ -40,7 +40,6 @@ export const ImageDisplay: React.FC<ImageDisplayProps> = ({ imageUrl, prompt, lo
         return (
             <div className="bg-white rounded-3xl p-4 shadow-sm border border-gray-100">
                 <div className="aspect-video w-full bg-gray-50 rounded-2xl flex flex-col items-center justify-center gap-4 relative overflow-hidden">
-                    {/* Animated gradient for loading */}
                     <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2s_infinite]" />
                     <div className="w-12 h-12 border-4 border-purple-100 border-t-purple-600 rounded-full animate-spin" />
                     <p className="text-gray-400 font-medium animate-pulse">Brewing your masterpiece...</p>
@@ -66,18 +65,13 @@ export const ImageDisplay: React.FC<ImageDisplayProps> = ({ imageUrl, prompt, lo
 
     return (
         <div className="bg-white rounded-3xl p-4 shadow-sm border border-gray-100 animate-in fade-in zoom-in duration-500">
-            {/* Image Title / Header inside card */}
             <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4 px-2">Image Display</h3>
-
-            {/* Main Image Container */}
             <div className="relative group rounded-2xl overflow-hidden bg-gray-50">
                 <img
                     src={imageUrl}
                     alt={prompt}
                     className="w-full h-auto aspect-video object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-
-                {/* Floating Action Buttons (Bottom Right as per image) */}
                 <div className="absolute bottom-4 right-4 flex gap-2">
                     <button
                         onClick={handleDownload}
@@ -96,7 +90,6 @@ export const ImageDisplay: React.FC<ImageDisplayProps> = ({ imageUrl, prompt, lo
                 </div>
             </div>
 
-            {/* Footer Prompt Area */}
             <div className="mt-4 p-4 bg-gray-50 rounded-2xl flex items-start gap-3">
                 <div className="mt-1 shrink-0">
                     <Sparkles size={16} className="text-purple-500" />

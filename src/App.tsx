@@ -20,14 +20,47 @@ function App() {
     return saved ? JSON.parse(saved) : [];
   });
 
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        return savedTheme === 'dark';
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  });
+
   useEffect(() => {
-    localStorage.setItem('image-history', JSON.stringify(history));
+    try {
+      const historyString = JSON.stringify(history);
+      localStorage.setItem('image-history', historyString);
+    } catch (error) {
+      console.error("LocalStorage Error:", error);
+
+      if (history.length > 1) {
+        setHistory(prev => prev.slice(0, prev.length - 1));
+      } else {
+        localStorage.removeItem('image-history');
+      }
+    }
   }, [history]);
 
-  const handleGenerate = async (prompt: string, style: string) => {
-    const result = await generateImage({ prompt, style });
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDark]);
+
+  const toggleTheme = () => setIsDark(!isDark);
+
+  const handleGenerate = async (prompt: string, style: string, aspectRatio: string) => {
+    const result = await generateImage({ prompt, style, aspectRatio });
     if (result) {
-      // Logic: add new result to front and keep only the last 5
       setHistory(prev => [result, ...prev].slice(0, 5));
     }
   };
@@ -38,18 +71,11 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] p-4 md:p-8">
+    <div className="min-h-screen bg-bg-main p-4 md:p-8 transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
+        <Header isDark={isDark} toggleTheme={toggleTheme} />
 
-        {/* Passing handleClearHistory to Header to match the purple button in image */}
-        <Header />
-
-        {/* MAIN GRID CONTAINER: 
-            Everything below the header must be inside this div 
-        */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-          {/* LEFT SECTION: Generator and Display (8 out of 12 columns) */}
           <div className="lg:col-span-8 space-y-8">
             <ImageGenerator
               onGenerate={handleGenerate}
@@ -64,8 +90,6 @@ function App() {
               onClear={clearImage}
             />
           </div>
-
-          {/* RIGHT SECTION: History Sidebar (4 out of 12 columns) */}
           <aside className="lg:col-span-4 h-full">
             <History
               history={history}
